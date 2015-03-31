@@ -27,6 +27,8 @@ create table representation(
 id INT(6) AUTO_INCREMENT PRIMARY KEY
 date date,
 salle INT(6),
+spectacle INT(6),
+foreign key spectacle references spectacle(id),
 foreign key salle references salle(id)
 );
 
