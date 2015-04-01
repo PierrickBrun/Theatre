@@ -1,6 +1,6 @@
 drop table LesVentes;
 drop table LesTickets;
-drop table LaSalle;
+drop table LesPlaces;
 drop table lesZones;
 drop table LesRepresentations;
 drop table LesSpectacles;
@@ -35,10 +35,10 @@ create table LesZones(
 
 
 /*Schema de la table:
-  LaSalle(ID de zone, ID de rang, ID de place)
+  LesPlaces(ID de zone, ID de rang, ID de place)
  La clef esst le triplet unique(Numzone, NumRang, NumPlace)
 i.e il n'existe qu'une seule place d'ID P dans le rang R de la zone Z*/
-create table LaSalle(
+create table LesPlaces(
   NumZone integer not null references LesZones(NumZone),
   NumRang integer,
   NumPlace integer,
@@ -56,7 +56,7 @@ create table LesTickets(
   NumPlace integer not null,
   NumSpec integer not null,
   DateRep date not null,
-  foreign key(NumZone, NumRang, NumPlace) references LaSalle(NumZone, NumRang, NumPlace),
+  foreign key(NumZone, NumRang, NumPlace) references LesPlaces(NumZone, NumRang, NumPlace),
   foreign key(NumSpec, DateRep) references LesRepresentations(NumSpec, DateRep)
 );
 
