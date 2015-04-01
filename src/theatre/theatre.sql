@@ -69,7 +69,7 @@ Cela pemet quand meme des configurations du genre :
   Dossier 12 date '23/12/2013/12:32:24' Ticket 231
   Dossier 12 date '23/12/2013/12:32:24' Ticket 232
   Dossier 12 date '23/12/2013/12:32:24' Ticket 233
-  Dossier 12 date '23/12/2013/12:32:24' Ticket 253
+  Dossier 12 date '23/12/2013/12:32:24' Ticket 256
 */
 create table LesVentes(
   IdDossier integer,
