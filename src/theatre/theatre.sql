@@ -47,7 +47,8 @@ create table LaSalle(
 
 /*Schema de la table:
   LesTickets(ID du ticket, ID de zone, ID de rang, ID de place, ID de spectacle, Date de representation)
- La clef est l'ID du ticket (NumTicket)*/
+ La clef est l'ID du ticket (NumTicket)
+On peut récuperer le tarif grâce à l'ID de zone.*/
 create table LesTickets(
   NumTicket integer primary key,
   NumZone integer not null,
@@ -63,7 +64,7 @@ create table LesTickets(
   LesVentes(ID du dossier, Date d'achet, Numero de ticket(s) lié(s)
  la clef est le triplet unique(NumDossier, DateAchat, NumTicket)
 i.e il n'existe qu'un dossier d'ID I dont la transaction a été effecutée en date D
-et done le numéro de ticket est N
+et dont le numéro de ticket est N
 Cela pemet quand meme des configurations du genre :
   Dossier 12 date '23/12/2013/12:32:24' Ticket 231
   Dossier 12 date '23/12/2013/12:32:24' Ticket 232
