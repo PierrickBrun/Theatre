@@ -1,6 +1,6 @@
 drop table LesVentes;
 drop table LesTickets;
-drop table LaSalle;
+drop table LesPlaces;
 drop table lesZones;
 drop table LesRepresentations;
 drop table LesSpectacles;
@@ -9,9 +9,9 @@ drop table LesSpectacles;
   LesSpectacles(ID du spectacle, Nom du spectacle)
  la clef est l'ID du spectacle (NumSpec)*/
 create table LesSpectacles(
-  NumSpec integer primary key,
+  IdSpec integer primary key,
   NomSpec varchar2(64),
-  constraint spec_c0 check (NumSpec > 0)
+  constraint spec_c0 check (IdSpec > 0)
 );
 
 
@@ -19,30 +19,31 @@ create table LesSpectacles(
   LesRepresentations(ID du spectacle, Date de representation)
 la clef est le couple unique (NumSpec, DateRep)*/
 create table LesRepresentations(
-  NumSpec integer not null references LesSpectacles(NumSpec),
+  IdSpec integer not null references LesSpectacles(IdSpec) primary key,
   DateRep date not null Unique ,
-primary key(NumSpec, DateRep)
+constraint rep_c0 Unique (IdSpec, DateRep)
 );
 
 /*Schema de la table:
   LesZones(ID de la zone, nom de la zone, tarif de la zone)
 la clef est l'ID de la zone (NumZone)*/
 create table LesZones(
-  NumZone integer primary key,
+  IdZone Integer primary key,
   NomZone varchar2(64),
   Tarif integer
 );
 
 
 /*Schema de la table:
-  LaSalle(ID de zone, ID de rang, ID de place)
+  LesPlaces(ID de zone, ID de rang, ID de place)
  La clef esst le triplet unique(Numzone, NumRang, NumPlace)
 i.e il n'existe qu'une seule place d'ID P dans le rang R de la zone Z*/
-create table LaSalle(
-  NumZone integer not null references LesZones(NumZone),
+create table LesPlaces(
+  IdPlace integer primary key,
+  IdZone integer not null references LesZones(IdZone),
   NumRang integer,
   NumPlace integer,
-  primary key(NumZone, NumRang, NumPlace)
+  constraint salle_c0 unique(IdPlace, IdZone, NumRang, NumPlace)
 );
 
 /*Schema de la table:
@@ -50,14 +51,13 @@ create table LaSalle(
  La clef est l'ID du ticket (NumTicket)
 On peut récuperer le tarif grâce à l'ID de zone.*/
 create table LesTickets(
-  NumTicket integer primary key,
-  NumZone integer not null,
-  NumRang integer not null,
-  NumPlace integer not null,
-  NumSpec integer not null,
+  IdTicket integer primary key,
+  NumTicket integer unique,
+  IdPlace integer not null references LesPlaces(IdPlace),
+  IdSpec integer not null,
   DateRep date not null,
-  foreign key(NumZone, NumRang, NumPlace) references LaSalle(NumZone, NumRang, NumPlace),
-  foreign key(NumSpec, DateRep) references LesRepresentations(NumSpec, DateRep)
+  foreign key(IdSpec, DateRep) references LesRepresentations(IdSpec, DateRep),
+  constraint tickets_c0 check(NumTicket > 0)
 );
 
 /*Schema de la table:
@@ -72,11 +72,11 @@ Cela pemet quand meme des configurations du genre :
   Dossier 12 date '23/12/2013/12:32:24' Ticket 253
 */
 create table LesVentes(
+  IdDossier integer,
   NumDossier integer,
   DateAchat timestamp,
-  NumTicket integer not null references LesTickets(NumTicket),
-  primary key(NumDossier, DateAchat, NumTicket),
-  constraint vente_c0 check(NumDossier > 0),
-  constraint vente_c1 check(NumTicket > 0)
+  IdTicket integer not null references LesTickets(IdTicket),
+  primary key(IdDossier, DateAchat, IdTicket),
+  constraint vente_c0 check(NumDossier > 0)
 );
 
