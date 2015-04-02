@@ -5,7 +5,7 @@
  */
 package theatre.vue;
 
-import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -45,14 +45,14 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "zones", "spectacle", "salle", "place", "ventes", "représentations" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "spectacles", "représentations", "zones", "places", "tickets", "ventes" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "spectacles" }));
 
         jLabel1.setText("Parmis les :");
 
@@ -70,27 +70,25 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jScrollPane1)))
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -102,8 +100,28 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    final DefaultComboBoxModel spectaclesModel = new DefaultComboBoxModel(new String[]{"spectacles"});
+    final DefaultComboBoxModel representationsModel = new DefaultComboBoxModel(new String[]{"représentations"});
+    final DefaultComboBoxModel zonesModel = new DefaultComboBoxModel(new String[]{"zones", "catégories de zones"});
+    final DefaultComboBoxModel placesModel = new DefaultComboBoxModel(new String[]{"places"});
+    final DefaultComboBoxModel ticketsModel = new DefaultComboBoxModel(new String[]{"tickets"});
+    final DefaultComboBoxModel ventesModel = new DefaultComboBoxModel(new String[]{"ventes"});
+
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         choiceBean2.setTable(jComboBox1.getSelectedIndex());
+        if ("spectacles".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(spectaclesModel);
+        } else if ("représentations".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(representationsModel);
+        } else if ("zones".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(zonesModel);
+        } else if ("places".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(placesModel);
+        } else if ("tickets".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(ticketsModel);
+        } else if ("ventes".equals(jComboBox1.getSelectedItem())) {
+            jComboBox2.setModel(ventesModel);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void choiceBean2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_choiceBean2PropertyChange
@@ -146,6 +164,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private theatre.controleur.ChoiceBean choiceBean2;

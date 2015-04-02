@@ -33,6 +33,7 @@ public class ChoiceBean implements Serializable {
      * @param table new value of table
      */
     public void setTable(int table) {
+        System.out.println("cEKJFJFJ");
         int old = table;
         this.table = table;
         propertySupport.firePropertyChange("table", old, table);
