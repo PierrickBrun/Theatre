@@ -33,32 +33,13 @@ public class ChoiceBean implements Serializable {
      * @param table new value of table
      */
     public void setTable(int table) {
-        System.out.println("cEKJFJFJ");
         int old = table;
         this.table = table;
         propertySupport.firePropertyChange("table", old, table);
     }
 
-    private LinkedList<String> actions;
-
-    /**
-     * Get the value of actions
-     *
-     * @return the value of actions
-     */
-    public LinkedList<String> getActions() {
-        return actions;
-    }
-
-    /**
-     * Set the value of actions
-     *
-     * @param actions new value of actions
-     */
-    public void setActions(LinkedList<String> actions) {
-        this.actions = actions;
-    }
-
+    // peut-être à réintégrer pour gérer les items à mettre dans la jComboCox2
+    // private LinkedList<String> actions;
     private int action;
 
     /**
@@ -103,9 +84,6 @@ public class ChoiceBean implements Serializable {
 
     public ChoiceBean() {
         propertySupport = new PropertyChangeSupport(this);
-        actions = new LinkedList();
-        actions.add("lol");
-        actions.add("caca");
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

@@ -125,8 +125,6 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void choiceBean2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_choiceBean2PropertyChange
-        System.out.println("caca");
-        choiceBean2.getActions().forEach(String -> jComboBox2.addItem(String));
     }//GEN-LAST:event_choiceBean2PropertyChange
 
     /**
