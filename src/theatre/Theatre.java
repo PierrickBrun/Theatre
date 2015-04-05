@@ -1,79 +1,61 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package theatre;
 
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Scanner;
 
-/**
- *
- * @author Pierrick_2
- */
-public class Theatre {
+class Theatre {
 
-    final static String jdbcDriverName = "com.mysql.jdbc.Driver";
-    final static String urlDB = "jdbc:mysql://localhost/theatre";
-// ouverture d’une nouvelle connexion à la BD
+    private static final String configurationFile
+            = "BD.properties";
 
-    private static void loadDriver() throws ClassNotFoundException {
+    public static void main(String args[]) {
         try {
-            Class.forName(jdbcDriverName).newInstance();
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Theatre.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Theatre.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+            String jdbcDriver, dbUrl, username, password;
+            DatabaseAccessProperties dap = new DatabaseAccessProperties(configurationFile);
+            jdbcDriver = dap.getJdbcDriver();
+            dbUrl = dap.getDatabaseUrl();
+            username = dap.getUsername();
+            password = dap.getPassword();
+            Scanner sc = new Scanner(System.in);
+            
+            
+// Load the database driver
+            Class.forName(jdbcDriver);
+// Get a connection to the database
+            Connection conn = DriverManager.getConnection(dbUrl,
+                    username, password);
 
-    private static Connection newConnection() throws SQLException {
-        Connection conn = DriverManager.getConnection(
-                urlDB, "root", "");
-        return conn;
-    }
-
-    public static void listPersons(Connection conn) throws SQLException {
-        Statement st = null;
-        try {
-// create new statement
-            st = conn.createStatement();
-            String query = "SELECT * FROM achat";
-            ResultSet rs = st.executeQuery(query);
-            while (rs.next()) {
-                System.out.println("lol : " + rs.getString(1) + rs.getString(2) + rs.getString(3));
-            }
-        } finally {
-// close statement and connection
-            if (st != null) {
-                st.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-
-        try {
-            // chargement du pilote
-            loadDriver();
-// ouverture de connexion
-            Connection conn = newConnection();
-// exécution d'une requête
-            listPersons(conn);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Theatre.class.getName()).log(Level.SEVERE, null, ex);
+            requetesbd.nbartistes(conn);
+            requetesbd.artistes(conn);
+            //requetesbd.artistes_preferes(conn);
+            requetesbd.CD(conn);
+            
+            requetesbd.spectacles(conn);
+            
+            requetesbd.representations(conn);
+            
+            //Donne le nom d'un spectacle en fonction de son numero
+            System.out.println("Donner un numero de spectacle : ");
+            requetesbd.spectacle_et_nom(conn,true,sc.nextInt());
+            System.out.println("Donner un numero de spectacle again : ");
+            requetesbd.spectacle_et_representation(conn,sc.nextInt());
+            // Print information about connection warnings
+            SQLWarningsExceptions.printWarnings(conn);
+            conn.close();
+            
+            sc.close();
         } catch (SQLException se) {
-            Logger.getLogger(Theatre.class.getName()).log(Level.SEVERE, null, se);
+            // Print information about SQL exceptions
+            SQLWarningsExceptions.printExceptions(se);
+            return;
+        } catch (Exception e) {
+            System.err.println("Exception: " + e.getMessage());
+            e.printStackTrace();
+            return;
+            
         }
-
+    
     }
-
 }
