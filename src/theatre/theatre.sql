@@ -18,11 +18,13 @@ create table LesSpectacles(
 /*Schema de la table:
   LesRepresentations(ID du spectacle, Date de representation)
 la clef est le couple unique (NumSpec, DateRep)*/
- create table LesRepresentations(
-  IdSpec integer not null references LesSpectacles(IdSpec) primary key,
-  DateRep date ,
-constraint rep_c0 Unique (IdSpec, DateRep)
+create table LesRepresentations(
+  IdSpec integer not null,
+  DateRep date,
+Foreign key(IdSpec) references LesSpectacles(IdSpec),
+primary key(IdSpec,DateRep)
 );
+
 
 /*Schema de la table:
   LesZones(ID de la zone, nom de la zone, tarif de la zone)
@@ -56,10 +58,9 @@ create table LesTickets(
   IdPlace integer not null references LesPlaces(IdPlace),
   IdSpec integer not null,
   DateRep date not null,
-  foreign key(IdSpec, DateRep) references LesRepresentations(IdSpec, DateRep),
+  foreign key(IdSpec, DateRep) references LesRepresentations(Idspec,DateRep),
   constraint tickets_c0 check(NumTicket > 0)
 );
-
 /*Schema de la table:
   LesVentes(ID du dossier, Num du dossier, Date achat, Numero de ticket(s) lié(s)
  la clef est le triplet unique(NumDossier, DateAchat, NumTicket)
