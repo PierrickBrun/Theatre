@@ -127,6 +127,7 @@ public class requetesbd {
         rs.close();
         stmt.close();
     }
+  
     
     
     
