@@ -27,19 +27,20 @@ class Theatre {
             Connection conn = DriverManager.getConnection(dbUrl,
                     username, password);
 
-            requetesbd.nbartistes(conn);
-            requetesbd.artistes(conn);
+            //requetesbd.nbartistes(conn);
+            //requetesbd.artistes(conn);
             //requetesbd.artistes_preferes(conn);
-            requetesbd.CD(conn);
-            
+            //requetesbd.CD(conn);
+            System.out.println("Affichage des spectacles disponibles : \n");
             requetesbd.spectacles(conn);
             
-            requetesbd.representations(conn);
-            
+           /* requetesbd.representations(conn);*/
+            System.out.println("Donner un nom de spectacle  afin de connaitre son numéro: ");         
+            requetesbd.noms_et_spectacle(conn, sc.nextLine());
             //Donne le nom d'un spectacle en fonction de son numero
-            System.out.println("Donner un numero de spectacle : ");
-            requetesbd.spectacle_et_nom(conn,true,sc.nextInt());
-            System.out.println("Donner un numero de spectacle again : ");
+            System.out.println("Donner un numero de spectacle  afin de connaitre son identifiant: ");
+            requetesbd.spectacle_et_nom(conn,sc.nextInt());
+            System.out.println("Donner un numero de spectacle afin de connaitre ses représentations: ");
             requetesbd.spectacle_et_representation(conn,sc.nextInt());
             // Print information about connection warnings
             SQLWarningsExceptions.printWarnings(conn);
