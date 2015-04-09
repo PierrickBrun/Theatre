@@ -44,7 +44,7 @@ class Theatre {
              requetesbd.spectacle_et_representation(conn,sc.nextInt());
              // Print information about connection warnings
              */
-            System.out.println(requetesbd.methode_b(conn, 1));
+            System.out.println(requetesbd.methode_f(conn,1));
             SQLWarningsExceptions.printWarnings(conn);
             conn.close();
 
