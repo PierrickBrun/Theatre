@@ -18,9 +18,9 @@ create table LesSpectacles(
 /*Schema de la table:
   LesRepresentations(ID du spectacle, Date de representation)
 la clef est le couple unique (NumSpec, DateRep)*/
-create table LesRepresentations(
+ create table LesRepresentations(
   IdSpec integer not null references LesSpectacles(IdSpec) primary key,
-  DateRep date not null Unique ,
+  DateRep date ,
 constraint rep_c0 Unique (IdSpec, DateRep)
 );
 
