@@ -47,7 +47,7 @@ create table LesPlaces(
 );
 
 /*Schema de la table:
-  LesTickets(ID du ticket, ID de zone, ID de rang, ID de place, ID de spectacle, Date de representation)
+  LesTickets(ID du ticket, Num du ticket, ID de place, ID de spectacle, Date de representation)
  La clef est l'ID du ticket (NumTicket)
 On peut récuperer le tarif grâce à l'ID de zone.*/
 create table LesTickets(
@@ -61,7 +61,7 @@ create table LesTickets(
 );
 
 /*Schema de la table:
-  LesVentes(ID du dossier, Date d'achet, Numero de ticket(s) lié(s)
+  LesVentes(ID du dossier, Num du dossier, Date achat, Numero de ticket(s) lié(s)
  la clef est le triplet unique(NumDossier, DateAchat, NumTicket)
 i.e il n'existe qu'un dossier d'ID I dont la transaction a été effecutée en date D
 et dont le numéro de ticket est N
