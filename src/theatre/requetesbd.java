@@ -9,7 +9,6 @@ package theatre;
  *
  * @author triton
  */
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,70 +33,70 @@ public class requetesbd {
      * @throws SQLException en cas d'erreur d'acc�s � la base de donn�es
      */
     /*
-    public static void nbartistes(Connection conn) throws SQLException {
-        // Get a statement from the connection
-        Statement stmt = conn.createStatement();
-        // Execute the query
-        ResultSet rs = stmt.executeQuery("SELECT count(*)FROM Artiste");
-        while (rs.next()) {
-            System.out.println("Nombre d'artistes : "
-                    + rs.getInt(1));
+     public static void nbartistes(Connection conn) throws SQLException {
+     // Get a statement from the connection
+     Statement stmt = conn.createStatement();
+     // Execute the query
+     ResultSet rs = stmt.executeQuery("SELECT count(*)FROM Artiste");
+     while (rs.next()) {
+     System.out.println("Nombre d'artistes : "
+     + rs.getInt(1));
 
-        }
-// Close the result set, statement and the connection
+     }
+     // Close the result set, statement and the connection
 
-        rs.close();
-        stmt.close();
-    }
-    */
-/*
-    public static void artistes(Connection conn) throws SQLException {
-        // Get a statement from the connection
-        Statement stmt = conn.createStatement();
-        // Execute the query
-        ResultSet rs = stmt.executeQuery("SELECT * FROM Artiste");
-        while (rs.next()) {
-            System.out.print("idartiste : "
-                    + rs.getInt(1) + " ");
-            System.out.print("nom : " + rs.getString(2) + " ");
-            System.out.println("categ : " + rs.getString(3));
-
-        }
-        rs.close();
-        stmt.close();
-
-    }
-    */
- /*
-    public static void artistes_preferes(Connection conn) throws SQLException {
-
-        Statement stmt = conn.createStatement();
-
-        ResultSet rs = stmt.executeQuery("SELECT id FROM Preferences"
-                + "WHERE typeid='artiste' AND NiveauP=1");
-        while (rs.next()) {
-            System.out.println("id : " + rs.getInt(1));
-        }
-        rs.close();
-        stmt.close();
-    }
-    */
+     rs.close();
+     stmt.close();
+     }
+     */
     /*
-    public static void CD(Connection conn) throws SQLException {
+     public static void artistes(Connection conn) throws SQLException {
+     // Get a statement from the connection
+     Statement stmt = conn.createStatement();
+     // Execute the query
+     ResultSet rs = stmt.executeQuery("SELECT * FROM Artiste");
+     while (rs.next()) {
+     System.out.print("idartiste : "
+     + rs.getInt(1) + " ");
+     System.out.print("nom : " + rs.getString(2) + " ");
+     System.out.println("categ : " + rs.getString(3));
 
-        Statement stmt = conn.createStatement();
+     }
+     rs.close();
+     stmt.close();
 
-        ResultSet rs = stmt.executeQuery("SELECT * FROM CD");
-        while (rs.next()) {
-            System.out.print("idcd: " + rs.getInt(1) + " ");
-            System.out.print("id artiste : " + rs.getInt(2) + " ");
-            System.out.print("Titre : " + rs.getString(3) + " ");
-            System.out.println("Date : " + rs.getString(4) + " ");
-        }
-        rs.close();
-        stmt.close();
-    }
-*/
+     }
+     */
+    /*
+     public static void artistes_preferes(Connection conn) throws SQLException {
+
+     Statement stmt = conn.createStatement();
+
+     ResultSet rs = stmt.executeQuery("SELECT id FROM Preferences"
+     + "WHERE typeid='artiste' AND NiveauP=1");
+     while (rs.next()) {
+     System.out.println("id : " + rs.getInt(1));
+     }
+     rs.close();
+     stmt.close();
+     }
+     */
+    /*
+     public static void CD(Connection conn) throws SQLException {
+
+     Statement stmt = conn.createStatement();
+
+     ResultSet rs = stmt.executeQuery("SELECT * FROM CD");
+     while (rs.next()) {
+     System.out.print("idcd: " + rs.getInt(1) + " ");
+     System.out.print("id artiste : " + rs.getInt(2) + " ");
+     System.out.print("Titre : " + rs.getString(3) + " ");
+     System.out.println("Date : " + rs.getString(4) + " ");
+     }
+     rs.close();
+     stmt.close();
+     }
+     */
     public static void spectacles(Connection conn) throws SQLException {
 
         Statement stmt = conn.createStatement();
@@ -111,77 +110,141 @@ public class requetesbd {
         rs.close();
         stmt.close();
     }
-    
+
     public static void noms_et_spectacle(Connection conn, String nom) throws SQLException {
 
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT IdSpec FROM LesSpectacles where LOWER(NomSpec)="+"'"+nom.toLowerCase()+"'");
-        
-        if(!rs.next()){
-             System.out.println("Pas de spectacle de ce nom");
-        }
-        else{
-          System.out.println("Identifiant: " + rs.getInt(1) + " ");
+        ResultSet rs = stmt.executeQuery("SELECT IdSpec FROM LesSpectacles where LOWER(NomSpec)=" + "'" + nom.toLowerCase() + "'");
+
+        if (!rs.next()) {
+            System.out.println("Pas de spectacle de ce nom");
+        } else {
+            System.out.println("Identifiant: " + rs.getInt(1) + " ");
         }
         System.out.println();
         rs.close();
         stmt.close();
     }
-    
-    
-    
-/*
-    public static void representations(Connection conn) throws SQLException {
 
-        Statement stmt = conn.createStatement();
+    /*
+     public static void representations(Connection conn) throws SQLException {
 
-        ResultSet rs = stmt.executeQuery("SELECT * FROM LesRepresentations");
-        while (rs.next()) {
-            System.out.print("IdSpec: " + rs.getInt(1) + " ");
-            System.out.println("Dates : " + rs.getString(2));
-        }
-        rs.close();
-        stmt.close();
-    }
-  */
-    
+     Statement stmt = conn.createStatement();
+
+     ResultSet rs = stmt.executeQuery("SELECT * FROM LesRepresentations");
+     while (rs.next()) {
+     System.out.print("IdSpec: " + rs.getInt(1) + " ");
+     System.out.println("Dates : " + rs.getString(2));
+     }
+     rs.close();
+     stmt.close();
+     }
+     */
     public static void spectacle_et_nom(Connection conn, int num) throws SQLException {
         Statement stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery("SELECT NomSpec FROM LesSpectacles where IdSpec = " + num);
 
         if (!rs.next()) {
-                System.out.println("Pas de spectacle identifie par " + num);
-           
-        } 
-        else {
-                System.out.println("Intitule(s) : " + rs.getString(1));
+            System.out.println("Pas de spectacle identifie par " + num);
+
+        } else {
+            System.out.println("Intitule(s) : " + rs.getString(1));
         }
         System.out.println();
         rs.close();
         stmt.close();
     }
 
-    
- public static void spectacle_et_representation(Connection conn, int num) throws SQLException {
+    public static void spectacle_et_representation(Connection conn, int num) throws SQLException {
 
-  Statement stmt = conn.createStatement();
-  ResultSet rs = stmt.executeQuery(" select distinct nomspec ,to_char(daterep, 'DD/MM/YYYY hh24:mi:ss') from lesspectacles natural left outer join lesrepresentations where Idspec=" + num);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(" select distinct nomspec ,to_char(daterep, 'DD/MM/YYYY hh24:mi:ss') from lesspectacles natural left outer join lesrepresentations where Idspec=" + num);
 
-  if (!rs.next()) {
-    System.out.println("Pas de spectacle de numero :" + num);
-  }
-  else {
-    do{
-      System.out.print("Noms : " + rs.getString(1)+" ");
-      System.out.println("Date : "+rs.getString(2));
-    }while (rs.next());
-  }
-  System.out.println();
-  rs.close();
-  stmt.close();
-}   
-    
-    
+        if (!rs.next()) {
+            System.out.println("Pas de spectacle de numero :" + num);
+        } else {
+            do {
+                System.out.print("Noms : " + rs.getString(1) + " ");
+                System.out.println("Date : " + rs.getString(2));
+            } while (rs.next());
+        }
+        System.out.println();
+        rs.close();
+        stmt.close();
+    }
+
+    public static String methode_b(Connection conn, int num) throws SQLException {
+        String result = "";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select * from LesZones where IdZone = " + num);
+
+        if (!rs.next()) {
+            result = "Pas de zone de numero :" + num;
+        } else {
+            do {
+                result += "Nom : " + rs.getString(1) + "\n";
+                result += "Tarif : " + rs.getInt(2) + "\n";
+            } while (rs.next());
+        }
+        rs.close();
+        stmt.close();
+        return result;
+    }
+
+    public static String methode_c(Connection conn, String categorieZone) throws SQLException {
+        String result = "";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select IdZone from LesZones where nomZone = \"" + categorieZone + "\"");
+
+        if (!rs.next()) {
+            result = "Pas de zone de nom :" + categorieZone;
+        } else {
+            do {
+                result += "Num : " + rs.getInt(1) + "\n";
+            } while (rs.next());
+        }
+        rs.close();
+        stmt.close();
+        return result;
+    }
+
+    public static String methode_d(Connection conn, String zone) throws SQLException {
+        String result = "";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select p.numRang, p.numPlace from LesZones z left join LesPlaces p on (z.idZone = p.idZone) where NomZone = " + zone);
+
+        if (!rs.next()) {
+            result = "Pas de zone :" + zone;
+        } else {
+            result += "Zone : " + zone;
+            do {
+                result += "rang : " + rs.getInt(1) + "\n";
+                result += "place : " + rs.getInt(2) + "\n";
+            } while (rs.next());
+        }
+        rs.close();
+        stmt.close();
+        return result;
+    }
+
+    public static String methode_e(Connection conn, int num) throws SQLException {
+        String result = "";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select z.NomZone,p.numRang, p.numPlace from LesZones z left join LesPlaces p on (z.idZone = p.idZone) where IdZone = " + num);
+
+        if (!rs.next()) {
+            result = "Pas de zone de numero :" + num;
+        } else {
+            result += "Zone : " + rs.getInt(1) + "\n";
+            do {
+                result += "rang : " + rs.getInt(2) + "\n";
+                result += "place : " + rs.getInt(3) + "\n";
+            } while (rs.next());
+        }
+        rs.close();
+        stmt.close();
+        return result;
+    }
+
 }
-// Close the result set, statement and the connection
