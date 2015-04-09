@@ -35,7 +35,7 @@ create table LesZones(
 
 
 /*Schema de la table:
-  LesPlaces(ID de zone, ID de rang, ID de place)
+  LesPlaces(ID de place, ID de zone, num de rang, num de place)
  La clef esst le triplet unique(Numzone, NumRang, NumPlace)
 i.e il n'existe qu'une seule place d'ID P dans le rang R de la zone Z*/
 create table LesPlaces(
