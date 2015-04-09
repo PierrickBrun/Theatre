@@ -36,6 +36,7 @@ INSERT INTO LesZones VALUES (9,'Fond de salle',10);
 INSERT INTO LesZones VALUES (10,'Strapontin',10);
 
 
+/*LesPlaces(ID de place, ID de zone, num de rang, num de place)*/
 
 
 INSERT INTO LesPlaces Values(1,1,1,1);
@@ -57,6 +58,7 @@ INSERT INTO LesPlaces Values(1001,6,1,2);
 
 
 
+/*  LesTickets(ID du ticket, Num du ticket, ID de place, ID de spectacle, Date de representation)
 */
 
 INSERT INTO LesTickets Values(1,1054,632,003,to_date('15/04/2015 22:00:00','dd/mm/yyyy hh24:mi:ss'));
@@ -72,6 +74,7 @@ INSERT INTO LesTickets Values(1034,5123,248,009,to_date('18/04/2015 22:00:00','d
 
 
 
+/*  LesVentes(ID du dossier, Num du dossier, Date achat, Numero de ticket(s) lié(s)*/
 
 INSERT INTO LesVentes values(1,10321,to_date('17/02/2015 21:22:14','dd/mm/yyyy hh24:mi:ss'),3);
 INSERT INTO LesVentes values(2,10322,to_date('17/02/2015 23:45:52','dd/mm/yyyy hh24:mi:ss'),2);
