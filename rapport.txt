@@ -1,0 +1,29 @@
+***** ETAT D'AVANCEMENT DU PROJET AVANT RENDU *****
+
+BD qui semble relativement efficace.
+Methodes a à f Implémentées.
+
+Parties non réalisées :
+  Certaines méthodes. (difficulté, ratio temps de travail / resultat)
+  Intégration de l'interface. (Manque de temps).
+  Blocage de 70 places. (Réalisation ?)
+  
+***** CONCEPTION *****
+  Nous avons 5 tables.
+   LesSpectacles, listant les spectacles par ID et intitulés.
+   
+   LesReprésentations, listant les représentations par couples uniques Id de
+   spectacle / Date de représentation.
+   
+   LesZones, listant les zones par identifiant, nom et tarif.
+   
+   LesPlaces, listant les places par Identifiant, identifant de zone, numero de
+   rang et numero de place dans ce rang. avec comme condition qu'une place dans
+   un rang donné d'une zone donnée est unique.
+   
+   LesTickets listant les tickets par Identifiant, numéro de ticket, Id de place
+  , Id de spectacle et date de représentation. Avec comme contrainte un numéro
+  de ticket non nul.
+  
+  LesVentes listant les ventes par ID de dossier, numéro de dossier, date
+  d'achat. avec comme contrainte que le numero de dossier ne peut être nul.

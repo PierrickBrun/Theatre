@@ -32,72 +32,9 @@ public class requetesbd {
 * @param conn connexion � la base de donn�es
      * @throws SQLException en cas d'erreur d'acc�s � la base de donn�es
      */
-    /*
-     public static void nbartistes(Connection conn) throws SQLException {
-     // Get a statement from the connection
-     Statement stmt = conn.createStatement();
-     // Execute the query
-     ResultSet rs = stmt.executeQuery("SELECT count(*)FROM Artiste");
-     while (rs.next()) {
-     System.out.println("Nombre d'artistes : "
-     + rs.getInt(1));
 
-     }
-     // Close the result set, statement and the connection
 
-     rs.close();
-     stmt.close();
-     }
-     */
-    /*
-     public static void artistes(Connection conn) throws SQLException {
-     // Get a statement from the connection
-     Statement stmt = conn.createStatement();
-     // Execute the query
-     ResultSet rs = stmt.executeQuery("SELECT * FROM Artiste");
-     while (rs.next()) {
-     System.out.print("idartiste : "
-     + rs.getInt(1) + " ");
-     System.out.print("nom : " + rs.getString(2) + " ");
-     System.out.println("categ : " + rs.getString(3));
-
-     }
-     rs.close();
-     stmt.close();
-
-     }
-     */
-    /*
-     public static void artistes_preferes(Connection conn) throws SQLException {
-
-     Statement stmt = conn.createStatement();
-
-     ResultSet rs = stmt.executeQuery("SELECT id FROM Preferences"
-     + "WHERE typeid='artiste' AND NiveauP=1");
-     while (rs.next()) {
-     System.out.println("id : " + rs.getInt(1));
-     }
-     rs.close();
-     stmt.close();
-     }
-     */
-    /*
-     public static void CD(Connection conn) throws SQLException {
-
-     Statement stmt = conn.createStatement();
-
-     ResultSet rs = stmt.executeQuery("SELECT * FROM CD");
-     while (rs.next()) {
-     System.out.print("idcd: " + rs.getInt(1) + " ");
-     System.out.print("id artiste : " + rs.getInt(2) + " ");
-     System.out.print("Titre : " + rs.getString(3) + " ");
-     System.out.println("Date : " + rs.getString(4) + " ");
-     }
-     rs.close();
-     stmt.close();
-     }
-     */
-    public static void spectacles(Connection conn) throws SQLException {
+    public static void methode_a_1(Connection conn) throws SQLException {
 
         Statement stmt = conn.createStatement();
 
@@ -111,7 +48,7 @@ public class requetesbd {
         stmt.close();
     }
 
-    public static void noms_et_spectacle(Connection conn, String nom) throws SQLException {
+    public static void methode_a_2(Connection conn, String nom) throws SQLException {
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT IdSpec FROM LesSpectacles where LOWER(NomSpec)=" + "'" + nom.toLowerCase() + "'");
@@ -127,26 +64,8 @@ public class requetesbd {
     }
   
     
-    
-    
-/*
-    public static void representations(Connection conn) throws SQLException {
 
-    /*
-     public static void representations(Connection conn) throws SQLException {
-
-     Statement stmt = conn.createStatement();
-
-     ResultSet rs = stmt.executeQuery("SELECT * FROM LesRepresentations");
-     while (rs.next()) {
-     System.out.print("IdSpec: " + rs.getInt(1) + " ");
-     System.out.println("Dates : " + rs.getString(2));
-     }
-     rs.close();
-     stmt.close();
-     }
-     */
-    public static void spectacle_et_nom(Connection conn, int num) throws SQLException {
+    public static void methode_a_3(Connection conn, int num) throws SQLException {
         Statement stmt = conn.createStatement();
 
         ResultSet rs = stmt.executeQuery("SELECT NomSpec FROM LesSpectacles where IdSpec = " + num);
@@ -162,7 +81,7 @@ public class requetesbd {
         stmt.close();
     }
 
-    public static void spectacle_et_representation(Connection conn, int num) throws SQLException {
+    public static void methode_a_4(Connection conn, int num) throws SQLException {
 
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(" select distinct nomspec ,to_char(daterep, 'DD/MM/YYYY hh24:mi:ss') from lesspectacles natural left outer join lesrepresentations where Idspec=" + num);
@@ -201,7 +120,7 @@ public class requetesbd {
     public static String methode_c(Connection conn, String categorieZone) throws SQLException {
         String result = "";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select IdZone from LesZones where nomZone = \'" + categorieZone + "\'");
+        ResultSet rs = stmt.executeQuery("select IdZone from LesZones where LOWER(nomZone) ="+"'" + categorieZone.toLowerCase() + "'");
 
         if (!rs.next()) {
             result = "Pas de zone de nom :" + categorieZone;
@@ -218,12 +137,12 @@ public class requetesbd {
     public static String methode_d(Connection conn, String zone) throws SQLException {
         String result = "";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select p.numRang, p.numPlace from LesZones z left join LesPlaces p on (z.idZone = p.idZone) where NomZone = \'" + zone + "\'");
+        ResultSet rs = stmt.executeQuery("select p.numRang, p.numPlace from LesZones z left join LesPlaces p on (z.idZone = p.idZone) where LOWER(NomZone) ="+"'"+ zone.toLowerCase() + "'");
 
         if (!rs.next()) {
             result = "Pas de zone :" + zone;
         } else {
-            result += "Zone : " + zone;
+            result += "Zone : " + zone +"\n";
             do {
                 result += "rang : " + rs.getInt(1) + "\n";
                 result += "place : " + rs.getInt(2) + "\n\n";
@@ -237,12 +156,12 @@ public class requetesbd {
     public static String methode_e(Connection conn, int num) throws SQLException {
         String result = "";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select z.NomZone,p.numRang, p.numPlace from LesZones z left join LesPlaces p on (z.idZone = p.idZone) where z.IdZone = " + num);
+        ResultSet rs = stmt.executeQuery("select NomZone,numRang, numPlace from LesZones natural join LesPlaces  where IdZone = " + num);
 
         if (!rs.next()) {
             result = "Pas de zone de numero :" + num;
         } else {
-            result += "Zone : " + rs.getInt(1) + "\n";
+            result += "Zone : " + rs.getString(1) + "\n";
             do {
                 result += "rang : " + rs.getInt(2) + "\n";
                 result += "place : " + rs.getInt(3) + "\n";
@@ -256,15 +175,16 @@ public class requetesbd {
     public static String methode_f(Connection conn, int num) throws SQLException {
         String result = "";
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("select nomSpec, DateRep, RangPlace, NumPlace from LesTickets natural join LesSpectacles, LesPlaces where IdTicket = " + num);
+        ResultSet rs = stmt.executeQuery("select nomSpec, to_char(DateRep, 'DD/MM/YYYY hh24:mi:ss'), IdZone, NumPlace, Numrang from LesTickets natural join (Select * from LesSpectacles natural join LesPlaces) where IdTicket = " + num);
 
         if (!rs.next()) {
             result = "Pas de zone de numero :" + num;
         } else {
                 result += "Nom : " + rs.getString(1) + "\n";
-                result += "Date : " + rs.getDate(2) + "\n";
-                result += "Place :\nRang : " + rs.getInt(3) + "\n";
-                result += "Date : " + rs.getInt(4) + "\n";
+                result += "Date : " + rs.getString(2) + "\n";
+                result +="Zone :" + rs.getInt(3) +"\n";
+                result += "Place : " + rs.getInt(4) + "\n";
+                result += "Rang : " + rs.getInt(5) + "\n";
         }
         rs.close();
         stmt.close();
